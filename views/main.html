@@ -1,0 +1,19 @@
+<md-toolbar md-colors="{background: 'blue-900'}" layout-wrap layout-align="start center" layout="row">
+	<div layout="row" layout-align="start center">
+	  	<md-menu md-offset="-200 45" layout="row" layout-align="start center">
+	      <md-button class="md-icon-button" aria-label="Settings" ng-click="$mdMenu.open(ev)">
+	      	<md-icon>menu</md-icon>
+	      </md-button>
+	      <md-menu-content width="4">
+	        <md-menu-item>
+	        	<md-button ng-click="mainCtrl.newArtist()">Novo Artista</md-button>
+	        </md-menu-item>
+	        <md-menu-item>
+	        	<md-button ng-click="mainCtrl.goToHome()">Página inicial</md-button>
+	        </md-menu-item>
+	      </md-menu-content>
+	    </md-menu>
+    </div>
+</md-toolbar>
+
+<div ui-view="content"></div>

@@ -13,6 +13,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.engine('html', require('pug').renderFile);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -24,6 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/js', express.static(__dirname + '/js/'));
+app.use('/views', express.static(__dirname + '/views/'));
+app.use('/models', express.static(__dirname + '/models/'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
