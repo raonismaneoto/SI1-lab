@@ -1,0 +1,14 @@
+<md-card>
+	<md-card-content ng-if="artistCtrl.hasArtists()">
+		<md-list ng-repeat="artist in artistCtrl.user.artists | orderBy: 'name'">
+			<md-list-item href class="md-line hyperlink">
+				<a class="md-title hyperlink" md-colors="{color: 'blue-900'}" ng-click="artistCtrl.showArtistDetails(artist, $event)">
+					<h2>{{artist.name}}</h2>
+				</a>
+			</md-list-item>
+        </md-list>
+	</md-card-content>
+	<md-card-content ng-if="!artistCtrl.hasArtists()" layout="row" layout-align="center center">
+		<h2><b>Você não tem artistas cadastrados!</b></h2>
+	</md-card-content>
+</md-card>

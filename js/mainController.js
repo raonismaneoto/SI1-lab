@@ -13,8 +13,15 @@
 
         mainCtrl.goToHome = function goToHome() {
         	$state.go("app.home");
-        }
+        };
 
-       
+        mainCtrl.showArtists = function showArtists() {
+            $state.go("app.artists");
+        };
+
+        mainCtrl.addMusic = function addMusic() {
+            $state.go("app.newMusic");
+        };
+
     });
 })();

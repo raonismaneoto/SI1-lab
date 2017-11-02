@@ -37,6 +37,15 @@
                         controller: "ArtistController as artistCtrl"
                     }
                 }
+            })
+            .state("app.artists", {
+                url: "/artists",
+                views: {
+                    content: {
+                        templateUrl: "views/artists.html",
+                        controller: "ArtistController as artistCtrl"
+                    }
+                }
             });
     });
 })();

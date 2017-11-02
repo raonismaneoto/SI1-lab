@@ -7,15 +7,6 @@
         var homeCtrl = this;
 
         homeCtrl.user = StorageService.user;
-        console.log(homeCtrl.user.artists);
-
-        homeCtrl.goToTest = function goToTest() {
-        	$state.go("app.test")
-        }
-
-        homeCtrl.vuvuzelaViado = function vuvuzelaViado() {
-        	alert("deu a bunda");
-        };
        
     });
 })();

@@ -1,24 +1,25 @@
 <md-card layout="row" layout-align="center center">
-	<md-content>
-		<form name="artistForm">
-			<div layout="row">
-		    	<md-input-container class="md-block" flex-gt-xs flex="60">
-			        <label>Nome </label>
-			        <input type="text" name="name" required md-maxlength="90"
-			            ng-model="artistCtrl.name">
-			        <div ng-messages='artistForm.name.$error'>
-			            <div ng-message="required">Este campo é obrigatório!</div>
-			        </div>
-		        </md-input-container>
-		        <md-input-container class="md-block" flex-gt-xs flex="60">
-			        <label>Imagem </label>
-			        <input type="text" name="image"
-			            ng-model="artistCtrl.image">
-		        </md-input-container>
-		    </div>
-		</form>
-	</div>
-	<md-card-actions layout="row" layout-align="end center">
-		<md-button class="md-raised md-primary" ng-click="artistCtrl.addArtist()">Submeter Artista</md-button>
-	</md-card-actions>
+	<md-card-content>
+			<form name="artistForm">
+				<div layout="row">
+			    	<md-input-container class="md-block" flex-gt-xs flex="60">
+				        <label>Nome </label>
+				        <input type="text" name="name" required md-maxlength="90"
+				            ng-model="artistCtrl.name">
+				        <div ng-messages='artistForm.name.$error'>
+				            <div ng-message="required">Este campo é obrigatório!</div>
+				        </div>
+			        </md-input-container>
+			        <md-input-container class="md-block" flex-gt-xs flex="60">
+				        <label>Imagem </label>
+				        <input type="text" name="image"
+				            ng-model="artistCtrl.image">
+			        </md-input-container>
+			    </div>
+			</form>
+		</div>
+		<md-card-actions layout="row" layout-align="end center">
+			<md-button class="md-raised md-primary" ng-click="artistCtrl.addArtist()">Submeter Artista</md-button>
+		</md-card-actions>
+	</md-card-content>
 </md-card>

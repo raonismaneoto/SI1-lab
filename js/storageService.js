@@ -11,6 +11,17 @@
         	service.user = new User();
         };
 
+        service.showToast = function showToast(message) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(message)
+                    .action('FECHAR')
+                    .highlightAction(true)
+                    .hideDelay(5000)
+                    .position('bottom right')
+            );
+        }
+
         service.startUser();
 	});
 })();

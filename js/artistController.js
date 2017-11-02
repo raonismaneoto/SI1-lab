@@ -3,7 +3,7 @@
 (function() {
     var app = angular.module("main");
 
-    app.controller("ArtistController", function ArtistController($state, StorageService, $mdToast) {
+    app.controller("ArtistController", function ArtistController($state, StorageService, $mdToast, $mdDialog) {
         var artistCtrl = this;
 
         artistCtrl.user = StorageService.user;
@@ -12,7 +12,7 @@
         	if(artistCtrl.name) {
 	        	var data = {name: artistCtrl.name, image: artistCtrl.image};
 	        	var artist = new Artist(data);
-	        	var thereIsAnArtistWithSameName = _.find(artistCtrl.user, function(currentArtist) {
+	        	var thereIsAnArtistWithSameName = _.find(artistCtrl.user.artists, function(currentArtist) {
 	        		return currentArtist.name === artist.name;
 	        	});
 	        	if(thereIsAnArtistWithSameName) {
@@ -26,6 +26,24 @@
         		showToast("O nome do artista é obrigatório");
         	}
         };
+
+        artistCtrl.showArtistDetails = function showArtistDetails(artist, ev) {
+            $mdDialog.show({
+                controller: function DialogController(artist) {this.artist = artist},
+                controllerAs: "controller",
+                templateUrl: 'views/artist_details.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true,
+                locals: {
+                    artist: artist
+                }
+            });
+        };
+
+        artistCtrl.hasArtists = function hasArtists() {
+            return !_.isEmpty(artistCtrl.user.artists);
+        }
 
         function showToast(message) {
             $mdToast.show(
