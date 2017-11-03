@@ -23,5 +23,9 @@
             $state.go("app.newMusic");
         };
 
+        mainCtrl.showMusics = function showMusics() {
+            $state.go("app.musics_details");
+        };
+
     });
 })();

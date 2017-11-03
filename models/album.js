@@ -6,7 +6,7 @@ function Album(data) {
 
 Album.prototype.addMusic = function addMusic(musicToAdd) {
 	var music = _.find(this.musics, function(currentMusic) {
-		return currentMusic === musicToAdd;
+		return currentMusic.name === musicToAdd.name;
 	});
 	if (music) {
 		return false;

@@ -10,19 +10,20 @@ User.prototype.addArtist = function addArtist(artistToAdd) {
 };
 
 User.prototype.addMusic = function addMusic(music) {
-	var album = this.findAlbum(music.album.name)
+	var album = this.findAlbum(music.album)
 	if (album) {
 		var worked = album.addMusic(music);
 		return worked;
 	} else {
 		var data = {name: music.album, musics: [music]};
 		var newAlbum = new Album(data);
+		this.albuns.push(newAlbum);
 	}
 };
 
 User.prototype.findAlbum = function findAlbum(name) {
 	var album = _.find(this.albuns, function(currentAlbum) {
-		return currentAlbum === name;
+		return currentAlbum.name === name;
 	});
 	return album;
 };

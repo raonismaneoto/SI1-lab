@@ -1,0 +1,27 @@
+<md-card>
+	<md-card-content layout="column" flex="100" layout-margin ng-if="musicCtrl.hasAlbum()">
+		<md-list ng-repeat="album in musicCtrl.user.albuns">
+			<div ng-repeat="music in album.musics | orderBy: 'name'" style="box-shadow: 2px 2px 1px #888888;">
+				<md-list-item layout-align="center center">
+					<h1> {{music.name}}</h1>
+				</md-list-item>
+				<md-divider></md-divider>
+				<md-list-item layout-align="center center">
+					<h2>Álbum: {{music.album}}</h2>
+				</md-list-item>
+				<md-list-item layout-align="center center">
+					<h2>Ano de lançamento: {{music.releaseYear}}</h2>
+				</md-list-item>
+				<md-list-item layout-align="center center">
+					<h2>Duração: {{music.duration}} </h2>
+				</md-list-item>
+				<md-list-item layout-align="center center">
+					<h2>Artista: {{music.artist}}</h2>
+				</md-list-item>
+			</div>
+		</md-list>
+	</md-card-content>
+	<md-card-content ng-if="!musicCtrl.hasAlbum()" layout="row" layout-align="center center">
+		<h2><b>Você não tem músicas cadastradas!</b></h2>
+	</md-card-content>
+</md-card>

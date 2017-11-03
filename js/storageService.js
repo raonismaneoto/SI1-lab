@@ -2,7 +2,7 @@
     "use strict";
     var app = angular.module("main");
 
-    app.service("StorageService", function StorageService() {
+    app.service("StorageService", function StorageService($mdToast) {
         var service = this;
 
         service.user = {};

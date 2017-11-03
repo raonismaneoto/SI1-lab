@@ -46,6 +46,24 @@
                         controller: "ArtistController as artistCtrl"
                     }
                 }
+            })
+            .state("app.newMusic", {
+                url: "/new_music",
+                views: {
+                    content: {
+                        templateUrl: "views/new_music.html",
+                        controller: "MusicController as musicCtrl"
+                    }
+                }
+            })
+            .state("app.musics_details", {
+                url: "/musics_details",
+                views: {
+                    content: {
+                        templateUrl: "views/musics.html",
+                        controller: "MusicController as musicCtrl"
+                    }
+                }
             });
     });
 })();

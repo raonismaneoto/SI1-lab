@@ -3,7 +3,7 @@
 (function() {
     var app = angular.module("main");
 
-    app.controller("MusicController", function MusicController($state, StorageService) {
+    app.controller("MusicController", function MusicController($state, StorageService, $mdDialog) {
         var musicCtrl = this;
 
         musicCtrl.user = StorageService.user;
@@ -21,27 +21,48 @@
         	} else {
         		var album = musicCtrl.user.findAlbum(music.album);
         		if (album) {
-	    			var confirm = $mdDialog.confirm()
-	                .clickOutsideToClose(true)
-	                .title('Adicionar Música')
-	                .textContent('Esse álbum já existe, deseja adicionar a música no álbum existente?.')
-	                .ariaLabel('Adicionar Música')
-	                .targetEvent(ev)
-	                .ok('Adicionar')
-	                .cancel('Cancelar');
-
-		            $mdDialog.show(confirm).then(function ok() {
-		                musicCtrl.user.addMusic(music);
-		        		StorageService.showToast('Música adicionada com sucesso');
-		            }, function cancel() {
-		                MessageService.showToast('Cancelado');
-		            });
+	    			musicCtrl.showConfirmDialog(music, ev);
         		} else {
         			musicCtrl.user.addMusic(music);
 		        	StorageService.showToast('Música adicionada com sucesso');
         		}
         	}
+            clearFields();
+        };
+
+        musicCtrl.showConfirmDialog = function showConfirmDialog(music, ev) {
+            var confirm = $mdDialog.confirm()
+            .clickOutsideToClose(true)
+            .title('Adicionar Música')
+            .textContent('Esse álbum já existe, deseja adicionar a música no álbum existente?.')
+            .ariaLabel('Adicionar Música')
+            .targetEvent(ev)
+            .ok('Adicionar')
+            .cancel('Cancelar');
+
+            $mdDialog.show(confirm).then(function ok() {
+                var result = musicCtrl.user.addMusic(music);
+                if (result) {
+                    StorageService.showToast('Música adicionada com sucesso');
+                } else {
+                    StorageService.showToast('Música já existente no álbum');
+                }
+                
+            }, function cancel() {
+                MessageService.showToast('Cancelado');
+            });
+        };
+
+        musicCtrl.hasAlbum = function () {
+            return !_.isEmpty(musicCtrl.user.albuns);
+        };
+
+        function clearFields() {
+            musicCtrl.name = "";
+            musicCtrl.artist = "";
+            musicCtrl.album = "";
+            musicCtrl.releaseYear = "";
+            musicCtrl.duration = "";
         }
-       
     });
 })();
