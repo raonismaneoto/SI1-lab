@@ -1,5 +1,5 @@
 <md-card>
-	<md-card-content ng-if="artistCtrl.hasArtists()">
+	<md-card-content ng-if="artistCtrl.hasArtists()" layout-fill flex="100">
 		<md-list ng-repeat="artist in artistCtrl.user.artists | orderBy: 'name'">
 			<md-list-item href class="md-line hyperlink">
 				<a class="md-title hyperlink" md-colors="{color: 'blue-900'}" ng-click="artistCtrl.showArtistDetails(artist, $event)">

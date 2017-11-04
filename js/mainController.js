@@ -3,7 +3,7 @@
 (function() {
     var app = angular.module("main");
 
-    app.controller("MainController", function MainController($state) {
+    app.controller("MainController", function MainController($state, $mdSidenav) {
         var mainCtrl = this;
 
 
@@ -25,6 +25,14 @@
 
         mainCtrl.showMusics = function showMusics() {
             $state.go("app.musics_details");
+        };
+
+        mainCtrl.searchArtist = function searchArtist() {
+            $state.go("app.search_artist");
+        };
+
+        mainCtrl.toggle = function toggle() {
+            $mdSidenav('left').toggle();
         };
 
     });
