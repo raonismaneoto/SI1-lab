@@ -2,7 +2,7 @@
 	<md-dialog-content>
 		<md-list ng-repeat="searchedArtist in controller.searchResult">
 			<div layout="row" layout-align="start center" layout-margin>
-				<md-checkbox ng-checked="controller.isFavorite(searchedArtist)" ng-true-value="{{searchedArtist}}" ng-model="controller.currentFavorite[searchedArtist.name]" ng-false-value="" ng-change="controller.setFavorite(searchedArtist)">
+				<md-checkbox ng-checked="controller.isFavorite(searchedArtist)" ng-true-value="{{searchedArtist}}" ng-model="controller.currentFavorite[searchedArtist.name]" ng-false-value="" ng-change="controller.setFavorite(searchedArtist)" ng-if="controller.showFavorite" title="Adicionar aos favoritos">
 				</md-checkbox>
 				<md-list-item ng-click="controller.showDetails(searchedArtist)" layout-fill>
 					{{searchedArtist.name}}

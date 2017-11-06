@@ -8,6 +8,38 @@
 
         artistCtrl.user = StorageService.user;
         artistCtrl.searchResult = [];
+        artistCtrl.disableCheckBox = false;
+        artistCtrl.currentFavorite = {};
+
+        _.forEach(artistCtrl.user.artists, function(artist) {
+                artistCtrl.currentFavorite[artist.name] = "";
+        });
+
+        artistCtrl.isFavorite = function isFavorite(artist) {
+            return _.includes(artistCtrl.user.favoriteArtists, artist);
+        };
+
+        artistCtrl.setFavorite = function setFavorite(artist, ev) {
+            if(!_.isEmpty(artistCtrl.currentFavorite[artist.name])) {
+                artistCtrl.user.addFavorite(artist);
+            } else {
+                var confirm = $mdDialog.confirm()
+                .clickOutsideToClose(true)
+                .title('Remover artista dos favoritos')
+                .textContent('Você removerá ' + artist.name + "dos favoritos")
+                .ariaLabel('Remover artista dos favoritos')
+                .targetEvent(ev)
+                .ok('Remover')
+                .cancel('Cancelar');
+
+                $mdDialog.show(confirm).then(function ok() {
+                    artistCtrl.user.removeFavorite(artist);
+                    StorageService.showToast("Artista removido da lista de favoritos com sucesso.");
+                }, function cancel() {
+                    StorageService.showToast('Cancelado');
+                });
+            }
+        };
 
         artistCtrl.addArtist = function addArtist() {
         	if(artistCtrl.name) {
@@ -34,21 +66,23 @@
 
         artistCtrl.showArtistDetails = function showArtistDetails(artist, ev) {
             $mdDialog.show({
-                controller: function DialogController(artist) {this.artist = artist},
+                controller: DialogController,
                 controllerAs: "controller",
-                templateUrl: 'views/artist_details.html',
+                templateUrl: 'views/search_dialog.html',
                 parent: angular.element(document.body),
                 targetEvent: ev,
                 clickOutsideToClose:true,
                 locals: {
-                    artist: artist
+                    searchResult: [artist],
+                    user: artistCtrl.user,
+                    showFavorite: false
                 }
             });
         };
 
         artistCtrl.hasArtists = function hasArtists() {
             return !_.isEmpty(artistCtrl.user.artists);
-        }
+        };
 
         artistCtrl.searchArtist = function searchArtist(ev) {
             artistCtrl.searchResult = [];
@@ -67,7 +101,8 @@
                     clickOutsideToClose:true,
                     locals: {
                         searchResult: artistCtrl.searchResult,
-                        user: artistCtrl.user
+                        user: artistCtrl.user,
+                        showFavorite: true
                     }
                 });
             } else {
@@ -80,12 +115,13 @@
             return !_.isEmpty(artistCtrl.searchResult);
         };
 
-        function DialogController(searchResult, user) {
+        function DialogController(searchResult, user,showFavorite) {
             var dialogCtrl = this;
             dialogCtrl.user = user;
             dialogCtrl.searchResult = searchResult;
             dialogCtrl.currentFavorite = {};
             dialogCtrl.details = {};
+            dialogCtrl.showFavorite = showFavorite;
 
             _.forEach(dialogCtrl.user.artists, function(artist) {
                 dialogCtrl.currentFavorite[artist.name] = "";
