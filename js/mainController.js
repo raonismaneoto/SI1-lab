@@ -43,5 +43,15 @@
             $mdSidenav('left').toggle();
         };
 
+        mainCtrl.showPlayLists = function showPlayLists() {
+            $state.go("app.playLists");
+            mainCtrl.message = "PlayLists";
+        };
+
+        mainCtrl.addPlayList = function addPlayList() {
+            $state.go("app.new_playList");
+            mainCtrl.message = "Adicionar PlayList";
+        };
+
     });
 })();

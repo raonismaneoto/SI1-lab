@@ -3,7 +3,7 @@
 (function() {
     var app = angular.module("main");
 
-    app.controller("MusicController", function MusicController($state, StorageService, $mdDialog) {
+    app.controller("MusicController", function MusicController($state, StorageService, $mdDialog, $mdPanel) {
         var musicCtrl = this;
 
         musicCtrl.user = StorageService.user;
@@ -55,6 +55,29 @@
 
         musicCtrl.hasAlbum = function () {
             return !_.isEmpty(musicCtrl.user.albuns);
+        };
+
+
+        musicCtrl.hasPlayLists = function hasPlayLists() {
+            return !_.isEmpty(musicCtrl.user.playLists);
+        }
+
+        musicCtrl.availablePlayList = function availablePlayList(music, playList) {
+            return _.includes(playList.musics, music);
+        };
+
+        musicCtrl.addPlayList = function addPlayList(music, playList) {
+            var result = playList.addMusic(music);
+            if(result) {
+                StorageService.showToast("Música adicionada à " + playList.name + " com sucesso.");
+            } else {
+                StorageService.showToast("Já tem uma música com esse nome em " + playList.name);
+            }
+        };
+
+        musicCtrl.removePlayList = function removePlayList(music, playList) {
+            playList.removeMusic(music);
+            StorageService.showToast(music.name + " removida de " + playList.name);
         };
 
         function clearFields() {

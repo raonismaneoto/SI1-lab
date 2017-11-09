@@ -45,7 +45,6 @@
         	if(artistCtrl.name) {
 	        	var data = {name: artistCtrl.name, 
                     image: artistCtrl.image,
-                    albuns: _.split(artistCtrl.albuns, " "),
                     lastMusicListenned: artistCtrl.lastMusicListenned
                 };
 	        	var artist = new Artist(data);

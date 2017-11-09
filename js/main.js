@@ -73,6 +73,24 @@
                         controller: "ArtistController as artistCtrl"
                     }
                 }
+            })
+            .state("app.new_playList", {
+                url: "/new_playList",
+                views: {
+                    content: {
+                        templateUrl: "views/new_playlist.html",
+                        controller: "PlayListController as plCtrl"
+                    }
+                }
+            })
+            .state("app.playLists", {
+                url: "/playLists",
+                views: {
+                    content: {
+                        templateUrl: "views/playLists.html",
+                        controller: "PlayListController as plCtrl"
+                    }
+                }
             });
     });
 })();

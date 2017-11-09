@@ -8,7 +8,7 @@
 					{{searchedArtist.name}}
 				</md-list-item>
 			</div>
-			<md-card ng-if="controller.details[searchedArtist.name]">
+			<md-card ng-if="controller.details[searchedArtist.name] || !controller.showFavorite">
 				<div class="md-avatar" align="center" ng-if="searchedArtist.image" 
 				layout-align="center center" layout-margin>
 				    <img style="border-radius: 100%;" ng-src="{{searchedArtist.image }}"
@@ -18,11 +18,15 @@
 					<div>
 						Nome: {{searchedArtist.name}}
 					</div>
-					<md-list ng-if="controller.hasAlbuns(searchedArtist)" layout="row" layout-align="start center">
-						Álbuns:
-						<md-list-item class="md-line" ng-repeat="album in searchedArtist.albuns" layout="row">
-							{{album}}
+					<md-list ng-if="controller.hasAlbuns(searchedArtist)">
+						<div layout="row">
+							Álbuns:
+						<md-list-item class="md-3-line" layout-align="start center">
+							<div layout="column" class="md-list-item-text" ng-repeat="album in searchedArtist.albuns" layout-align="start center">
+								{{album}}
+							</div>
 						</md-list-item>
+						</div>
 					</md-list>
 					<div layout-fill style="margin-top: 5px;">
 						<md-input-container class="md-block" layout-fill>

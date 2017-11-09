@@ -4,10 +4,25 @@ function User() {
 	this.artists = [];
 	this.albuns = [];
 	this.favoriteArtists = [];
+	this.playLists = [];
 }
 
 User.prototype.addArtist = function addArtist(artistToAdd) {
 	this.artists.push(artistToAdd);
+};
+
+User.prototype.addPlayList = function addPlayList(playList) {
+	var thereIsTheSamePl = _.find(this.playLists, playList);
+	if(thereIsTheSamePl) {
+		return false;
+	} else {
+		this.playLists.push(playList);
+		return true;
+	}
+};
+
+User.prototype.removePlayList = function removePlayList(playList) {
+	_.remove(this.playLists, playList);
 };
 
 User.prototype.addMusic = function addMusic(music) {

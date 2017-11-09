@@ -1,3 +1,4 @@
+<div layout-fill flex>
 <md-toolbar md-colors="{background: 'blue-900'}" layout="row" layout-align="center">
 	<div class="md-toolbar-tools" flex-lg="90" flex-gt-lg="70" layout="row" layout-align="center center">
 		<md-button class="md-icon-button hide-gt-sm" aria-label="Meu menu" ng-click="mainCtrl.toggle()" hide-gt-sm>
@@ -20,13 +21,16 @@
 	        <md-menu-item>
 	        	<md-button ng-click="mainCtrl.addMusic()">Adicionar Música</md-button>
 	        </md-menu-item>
+	        <md-menu-item>
+	        	<md-button ng-click="mainCtrl.addPlayList()">Adicionar PlayList</md-button>
+	        </md-menu-item>
 	      </md-menu-content>
 	    </md-menu>
     </div>
 </md-toolbar>
-<div layout="row" layout-align="start start" layout-fill>
+<div layout="row" layout-align="start start" layout-fill flex>
 	<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" layout="column"
-      md-is-locked-open="$mdMedia('gt-sm')" flex-gt-md="20" flex-gt-xs="30" flex layout-fill md-colors="{background: 'blue-900'}">
+      md-is-locked-open="$mdMedia('gt-sm')" flex-gt-md="20" flex-gt-xs="30" flex layout-fill md-colors="{background: 'blue-900'}" flex>
       <md-content class="md-icon-button hide-gt-sm" hide-gt-sm layout="column" md-colors="{background: 'blue-900'}" flex="100">
 	      <md-button ng-click="mainCtrl.showArtists()">
 	      	Ver artistas
@@ -37,6 +41,9 @@
 	      <md-button ng-click="mainCtrl.searchArtist()">
 	      	Pesquisar Artista
 	      </md-button>
+	      <md-button ng-click="mainCtrl.showPlayLists()">
+			Ver PlayLists
+		  </md-button>
       </md-content>
       <md-content class="hide-scrollbar" layout="column" hide show-gt-sm
           md-colors="{background: 'blue-900'}">
@@ -50,8 +57,12 @@
 					    <md-button ng-click="mainCtrl.searchArtist()">
 					      	Pesquisar Artista
 					    </md-button>
+					    <md-button ng-click="mainCtrl.showPlayLists()">
+					      	Ver PlayLists
+					    </md-button>
                     </div>
       </md-content>
     </md-sidenav>
 	<div ui-view="content" layout="column" flex="100"></div>
+</div>
 </div>
