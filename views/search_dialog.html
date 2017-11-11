@@ -8,42 +8,38 @@
 					{{searchedArtist.name}}
 				</md-list-item>
 			</div>
-			<md-card ng-if="controller.details[searchedArtist.name] || !controller.showFavorite">
-				<div class="md-avatar" align="center" ng-if="searchedArtist.image" 
-				layout-align="center center" layout-margin>
-				    <img style="border-radius: 100%;" ng-src="{{searchedArtist.image }}"
-				   	width="30%" height="100%"/>
-				</div>
-				<md-card-content layout="column" layout-align="start start">
-					<div>
-						Nome: {{searchedArtist.name}}
+			<div>
+				<md-card ng-if="controller.details[searchedArtist.name] || !controller.showFavorite">
+					<div class="md-avatar" align="center" ng-if="searchedArtist.image" 
+					layout-align="center center" layout-margin>
+					    <img style="border-radius: 100%;" ng-src="{{searchedArtist.image }}"
+					   	width="30%" height="100%"/>
 					</div>
-					<md-list ng-if="controller.hasAlbuns(searchedArtist)">
+					<md-card-content layout="column" layout-align="start start" layout-margin>
+						<div>
+							Nome: {{searchedArtist.name}}
+						</div>
 						<div layout="row">
 							Álbuns:
-						<md-list-item class="md-3-line" layout-align="start center">
-							<div layout="column" class="md-list-item-text" ng-repeat="album in searchedArtist.albuns" layout-align="start center">
-								{{album}}
-							</div>
-						</md-list-item>
+							{{controller.albuns[searchedArtist.name]}}
 						</div>
-					</md-list>
-					<div layout-fill style="margin-top: 5px;">
-						<md-input-container class="md-block" layout-fill>
-					        <label class="md-raised">Última música ouvida</label>
-					        <input type="text" name="name" ng-model="searchedArtist.lastMusicListenned">
-				        </md-input-container>
-				        <md-input-container class="md-truncate" layout-fill>
-					        <label class="md-raised">Nota</label>
-					        <md-select name="grade" ng-model="searchedArtist.grade">
-			                  <md-option ng-repeat="grade in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
-			                    ng-value="grade">{{ grade }}
-			                  </md-option>
-			                </md-select>
-					    </md-input-container>
-				    </div>
-				</md-card-content>
-			</md-card>
+						<div layout-fill style="margin-top: 5px;">
+							<md-input-container class="md-block" layout-fill>
+						        <label class="md-raised">Última música ouvida</label>
+						        <input type="text" name="name" ng-model="searchedArtist.lastMusicListenned">
+					        </md-input-container>
+					        <md-input-container class="md-truncate" layout-fill>
+						        <label class="md-raised">Nota</label>
+						        <md-select name="grade" ng-model="searchedArtist.grade">
+				                  <md-option ng-repeat="grade in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+				                    ng-value="grade">{{ grade }}
+				                  </md-option>
+				                </md-select>
+						    </md-input-container>
+					    </div>
+					</md-card-content>
+				</md-card>
+			</div>
 		</md-list>
 	</md-dialog-content>
 </md-dialog>

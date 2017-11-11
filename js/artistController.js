@@ -56,11 +56,12 @@
 	        	} else {
 	        		artistCtrl.user.addArtist(artist);
 	        		StorageService.showToast('Artista adicionado com sucesso');
-	        		artistCtrl.name = "";
 	        	}
         	} else {
         		StorageService.showToast("O nome do artista é obrigatório");
         	}
+            artistCtrl.name = "";
+            artistCtrl.image = "";
         };
 
         artistCtrl.showArtistDetails = function showArtistDetails(artist, ev) {
@@ -125,6 +126,20 @@
             _.forEach(dialogCtrl.user.artists, function(artist) {
                 dialogCtrl.currentFavorite[artist.name] = "";
             });
+
+            dialogCtrl.albuns = {};
+
+            _.forEach(dialogCtrl.user.artists, function(art) {
+                dialogCtrl.albuns[art.name] = generateAlbumString(art);
+            })
+
+            function generateAlbumString(art) {
+                var result = "";
+                _.forEach(art.albuns, function(album) {
+                    result += album.name + ", "
+                });
+                return result.slice(0, -2);
+            }
 
             dialogCtrl.isFavorite = function isFavorite(artist) {
                 return _.includes(dialogCtrl.user.favoriteArtists, artist);

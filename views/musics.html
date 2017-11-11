@@ -1,11 +1,11 @@
-<div layout-fill>
-	<md-card flex layout-fill>
+<div>
+	<md-card flex>
 		<div>
 			<md-card-content layout="column" flex="100" layout-margin ng-if="musicCtrl.hasAlbum()">
 				<md-list ng-repeat="album in musicCtrl.user.albuns">
 					<div ng-repeat="music in album.musics | orderBy: 'name'" style="box-shadow: 2px 2px 1px #888888;">
 						<md-list-item layout="row" layout-align="space-between center">
-							<h1> {{music.name}}</h1>
+							<h2> {{music.name}}</h2>
 							<div layout="row" layout-align="end start" class="md-secondary">
 								<md-menu md-offset="-200 45" layout="row" layout-align="start center">
 							      <md-button class="md-icon-button" aria-label="Settings" ng-click="$mdMenu.open(ev)" title="Adicionar à PlayList">
@@ -16,7 +16,7 @@
 							        	<div layout="row" layout-align="space-between center">
 						        			<b style="word-break: break-all;">{{pl.name}}</b>
 						        			<div layout="row" layout-align="end center">	
-							        			<md-button ng-click="musicCtrl.addPlayList(music, pl)" class="md-icon-button">
+							        			<md-button ng-click="musicCtrl.addPlayList(music, pl)" class="md-icon-button" title="Adicionar música na playList">
 						        					<md-icon ng-class="musicCtrl.availablePlayList(music, pl)?'md-warn':''">bookmark</md-icon>
 						        				</md-button>
 						        				<md-button ng-click="musicCtrl.removePlayList(music, pl)" class="md-icon-button" ng-if="musicCtrl.availablePlayList(music, pl)">
@@ -31,16 +31,16 @@
 						</md-list-item>
 						<md-divider></md-divider>
 						<md-list-item layout-align="center center">
-							<h2>Álbum: {{music.album}}</h2>
+							<h3>Álbum: {{music.album}}</h3>
 						</md-list-item>
 						<md-list-item layout-align="center center">
-							<h2>Ano de lançamento: {{music.releaseYear}}</h2>
+							<h3>Ano de lançamento: {{music.releaseYear}}</h3>
 						</md-list-item>
 						<md-list-item layout-align="center center">
-							<h2>Duração: {{music.duration}} </h2>
+							<h3>Duração: {{music.duration}} </h3>
 						</md-list-item>
 						<md-list-item layout-align="center center">
-							<h2>Artista: {{music.artist}}</h2>
+							<h3>Artista: {{music.artist}}</h3>
 						</md-list-item>
 					</div>
 				</md-list>

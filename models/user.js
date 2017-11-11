@@ -44,6 +44,13 @@ User.prototype.findAlbum = function findAlbum(name) {
 	return album;
 };
 
+User.prototype.findArtist = function findArtist(name) {
+	var artist = _.find(this.artists, function(currentArtist) {
+		return currentArtist.name === name;
+	});
+	return artist;
+};
+
 User.prototype.addFavorite = function addFavorite(artist) {
 	if(!_.includes(this.favoriteArtists, artist)) {
 		this.favoriteArtists.push(artist);

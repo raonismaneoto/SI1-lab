@@ -15,22 +15,51 @@
         		releaseYear: musicCtrl.releaseYear,
         		duration: musicCtrl.duration
         	};
-        	var music = new Music(data);
+            var music = new Music(data);
+            var hasThisArtist = musicCtrl.user.findArtist(music.artist);
+            if(!hasThisArtist) {
+                var artist = new Artist(
+                    {name: musicCtrl.artist, 
+                    albuns: [new Album(
+                        {name: musicCtrl.album, 
+                        musics: [music]
+                        })]
+                    }
+                );
+            }
         	if(!music.isValid()) {
         		StorageService.showToast('Campos obrigatórios não preenchidos corretamente');
         	} else {
         		var album = musicCtrl.user.findAlbum(music.album);
         		if (album) {
-	    			musicCtrl.showConfirmDialog(music, ev);
+                    if(!hasThisArtist) {
+                        musicCtrl.showConfirmDialog(music, ev, artist);
+                    } else {
+                        var result = musicCtrl.showConfirmDialog(music, ev);
+                        if (result)
+                            hasThisArtist.addAlbum(new Album(
+                                {name: musicCtrl.album, 
+                                musics: [music]
+                                })
+                            );
+                    }
         		} else {
         			musicCtrl.user.addMusic(music);
+                    if(!hasThisArtist)
+                        musicCtrl.user.addArtist(artist);
+                    else
+                        hasThisArtist.addAlbum(new Album(
+                            {name: musicCtrl.album, 
+                            musics: [music]
+                            })
+                        )
 		        	StorageService.showToast('Música adicionada com sucesso');
         		}
         	}
             clearFields();
         };
 
-        musicCtrl.showConfirmDialog = function showConfirmDialog(music, ev) {
+        musicCtrl.showConfirmDialog = function showConfirmDialog(music, ev, artist) {
             var confirm = $mdDialog.confirm()
             .clickOutsideToClose(true)
             .title('Adicionar Música')
@@ -43,9 +72,13 @@
             $mdDialog.show(confirm).then(function ok() {
                 var result = musicCtrl.user.addMusic(music);
                 if (result) {
+                    if(artist)
+                        musicCtrl.user.addArtist(artist);
                     StorageService.showToast('Música adicionada com sucesso');
+                    return true;
                 } else {
                     StorageService.showToast('Música já existente no álbum');
+                    return false;
                 }
                 
             }, function cancel() {
